@@ -1,0 +1,68 @@
+instance cone models/cone.obj
+instance cylinder models/cylinder.obj
+
+material cement-mat-1
+ambient 0.64 0.61 0.54
+end-material
+
+material cement-mat-2
+ambient 0.43 0.4 0.35
+end-material
+
+material cement-mat-3
+ambient 0.73 0.7 0.62
+end-material
+
+material red
+ambient 1 0 0
+end-material
+
+leaf base base instanceof cone
+assign-material base cement-mat-3
+scale base-scale base-scale 40 40 50
+rotate base-rotate base-rotate 90 0 1 0
+translate base-translate base-translate 0 0 0
+add-child base base-scale
+add-child base-scale base-rotate
+add-child base-rotate base-translate
+
+leaf slope slope instanceof cylinder
+assign-material slope cement-mat-1
+scale slope-scale slope-scale 40 80 50
+rotate slope-rotate slope-rotate 90 0 1 0
+translate slope-translate slope-translate 0 -80 0
+add-child slope slope-scale
+add-child slope-scale slope-rotate
+add-child slope-rotate slope-translate
+
+
+
+
+import door scenegraphmodels/door.txt
+scale door-scale door-scale 0.25 0.4 0.25
+rotate door-rotate door-rotate 0 0 1 0
+translate door-translate door-translate 0 -38 40
+add-child door door-scale
+add-child door-scale door-rotate
+add-child door-rotate door-translate
+
+
+
+
+
+
+leaf rod rod instanceof cylinder 
+assign-material rod red
+scale rod-scale rod-scale 2 500 2
+translate rod-translate rod-translate 0 -250 0
+add-child rod rod-scale
+add-child rod-scale rod-translate
+
+
+group slant-build slant-build
+assign-root slant-build
+
+add-child base-translate slant-build
+add-child slope-translate slant-build
+add-child door-translate slant-build
+#add-child rod-translate slant-build

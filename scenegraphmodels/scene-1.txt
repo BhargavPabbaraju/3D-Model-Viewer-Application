@@ -1,0 +1,84 @@
+
+
+
+instance box models/box.obj
+
+material ground-mat
+ambient 0.6 0.46 0.32
+end-material
+
+light light-white-right
+ambient 0.6 0.6 0.6
+diffuse 0.5 0.5 0.5
+specular 0.9 0.9 0.9
+position 0 400 400
+spot-direction 0 -1 -1
+spot-angle 180
+end-light
+
+
+leaf ground ground instanceof box
+assign-material ground ground-mat
+scale ground-scale ground-scale 500 10 500
+translate ground-translate ground-translate 0 0 0
+add-child ground ground-scale
+add-child ground-scale ground-translate
+
+group scene-1 scene-1 
+scale scene-1-scale scene-1-scale 1 1 1
+translate scene-1-translate scene-1-translate 0 0 0
+add-child scene-1 scene-1-scale
+rotate scene-1-rotate scene-1-rotate 0 0 1 0
+add-child scene-1-scale scene-1-rotate
+add-child scene-1-rotate scene-1-translate
+
+import building-1 scenegraphmodels/building-1.txt
+translate building-translate building-translate 0 0 0
+add-child building-1 building-translate
+
+import human-1 scenegraphmodels/human-1.txt
+scale human-1-scale human-1-scale 50 50 50
+translate human-1-translate human-1-translate -50 -24 120
+add-child human-1 human-1-scale
+rotate human-1-rotate human-1-rotate 90 0 1 0
+add-child human-1-scale human-1-rotate
+add-child human-1-rotate human-1-translate
+
+import human-2 scenegraphmodels/human-2.txt
+scale human-2-scale human-2-scale 70 50 70
+translate human-2-translate human-2-translate 80 0 120
+add-child human-2 human-2-scale
+rotate human-2-rotate human-2-rotate -10 0 1 0
+add-child human-2-scale human-2-rotate
+add-child human-2-rotate human-2-translate
+
+import box-build-1 scenegraphmodels/box-build-1.txt
+scale box-build-1-scale box-build-1-scale 0.3 0.3 0.3
+translate box-build-1-translate box-build-1-translate -140 0 -180
+rotate box-build-1-rotate box-build-1-rotate 0 0 1 0
+add-child box-build-1 box-build-1-scale
+add-child box-build-1-scale box-build-1-rotate
+add-child box-build-1-rotate box-build-1-translate
+
+import box-build-2 scenegraphmodels/box-build-2.txt
+scale box-build-2-scale box-build-2-scale 0.3 0.3 0.3
+translate box-build-2-translate box-build-2-translate 220 0 -100
+rotate box-build-2-rotate box-build-2-rotate 180 0 1 0
+add-child box-build-2 box-build-2-scale
+add-child box-build-2-scale box-build-2-rotate
+add-child box-build-2-rotate box-build-2-translate
+
+
+
+
+add-child building-translate scene-1
+add-child ground-translate scene-1
+add-child human-1-translate scene-1
+add-child human-2-translate scene-1
+add-child box-build-1-translate scene-1
+add-child box-build-2-translate scene-1
+
+
+
+assign-root scene-1-translate
+add-light light-white-right scene-1-translate

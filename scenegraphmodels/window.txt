@@ -1,0 +1,67 @@
+instance box models/box.obj
+
+material white
+ambient 1 1 1
+end-material
+
+material brown 
+ambient 0.59 0.29 0.0
+end-material 
+
+material glass-mat
+ambient 0.8 1 1
+end-material
+
+leaf brown-box brown-box instanceof box
+assign-material brown-box brown
+scale brown-box-scale brown-box-scale 100 100 6
+add-child brown-box brown-box-scale
+
+leaf pane pane instanceof box
+assign-material pane white
+scale pane-scale pane-scale 80 80 3
+translate pane-translate pane-translate 0 0 3
+add-child pane pane-scale
+add-child pane-scale pane-translate
+
+
+group glass glass 
+
+leaf glass-1 glass-1 instanceof box
+assign-material glass-1 glass-mat
+scale glass-1-scale glass-1-scale 20 20 2
+add-child glass-1 glass-1-scale
+translate glass-1-translate glass-1-translate -24 24 6
+add-child glass-1-scale glass-1-translate
+
+
+copy glass-2 glass-1-translate
+translate glass-2-translate glass-2-translate  25 0 0
+add-child glass-2 glass-2-translate
+
+copy glass-3 glass-2-translate
+translate glass-3-translate glass-3-translate  25 0 0
+add-child glass-3 glass-3-translate
+
+leaf glass-4 glass-4 instanceof box
+assign-material glass-4 glass-mat
+scale glass-4-scale glass-4-scale 68 40 2
+translate glass-4-translate glass-4-translate  0 -15 6
+add-child glass-4 glass-4-scale
+add-child glass-4-scale glass-4-translate
+
+add-child glass-1-translate glass
+add-child glass-2-translate glass
+add-child glass-3-translate glass
+add-child glass-4-translate glass
+
+
+group window window 
+
+
+add-child brown-box-scale window
+add-child pane-translate window
+add-child glass window
+
+assign-root window 
+

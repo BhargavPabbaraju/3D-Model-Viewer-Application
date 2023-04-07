@@ -1,0 +1,210 @@
+instance cone models/cone.obj
+instance cylinder models/cylinder.obj
+instance box models/box.obj
+
+material cement-mat-1
+ambient 0.64 0.61 0.54
+dffuse 0.64 0.61 0.54
+specular 0.64 0.61 0.54
+shininess 10
+end-material
+
+material cement-mat-2
+ambient 0.43 0.4 0.35
+dffuse 0.43 0.4 0.35
+specular 0.43 0.4 0.35
+shininess 10
+end-material
+
+material cement-mat-3
+ambient 0.73 0.7 0.62
+dffuse 0.73 0.7 0.62
+specular 0.73 0.7 0.62
+shininess 10
+end-material
+
+material red
+ambient 1 0 0
+end-material
+
+#light1
+light light-white-left
+ambient 0.6 0.6 0.6
+diffuse 0.5 0.5 0.5
+specular 0.9 0.9 0.9
+position -1 0 0
+spot-direction 1 0 0
+spot-angle 180
+end-light
+
+#light1
+light light-white-right
+ambient 0.6 0.6 0.6
+diffuse 0.5 0.5 0.5
+specular 0.9 0.9 0.9
+position 0 100 0
+spot-direction 0 -100 0
+spot-angle 180
+end-light
+
+#light1
+light light-white-top
+ambient 0.6 0.6 0.6
+diffuse 0.5 0.5 0.5
+specular 0.9 0.9 0.9
+position 0 1 0
+spot-direction 0 -1 0
+spot-angle 180
+end-light
+
+leaf rod rod instanceof cylinder 
+assign-material rod red
+scale rod-scale rod-scale 2 500 2
+translate rod-translate rod-translate 0 -250 0
+add-child rod rod-scale
+add-child rod-scale rod-translate
+
+
+leaf block-1 block-1 instanceof box
+assign-material block-1 cement-mat-1
+#add-light light-white-left block-1 
+scale block-1-scale block-1-scale 50 50 70
+translate block-1-translate block-1-translate 0 0 0
+add-child block-1 block-1-scale
+add-child block-1-scale block-1-translate
+
+
+leaf block-2 block-2 instanceof box
+assign-material block-2 cement-mat-2
+#add-light light-white-left block-2 
+scale block-2-scale block-2-scale 50 10 90
+translate block-2-translate block-2-translate 0 30 0
+add-child block-2 block-2-scale
+add-child block-2-scale block-2-translate
+
+leaf block-3 block-3 instanceof cylinder
+assign-material block-3 cement-mat-1
+#add-light light-white-top block-3 
+scale block-3-scale block-3-scale 30 30 30
+translate block-3-translate block-3-translate 0 50 0
+add-child block-3 block-3-scale
+add-child block-3-scale block-3-translate
+
+leaf cyl-1 cyl-1 instanceof cylinder
+assign-material cyl-1 cement-mat-1
+scale cyl-1-scale cyl-1-scale 30 60 30
+translate cyl-1-translate cyl-1-translate 80 0 60
+add-child cyl-1 cyl-1-scale
+add-child cyl-1-scale cyl-1-translate
+
+leaf box-1 box-1 instanceof box
+assign-material box-1 cement-mat-1
+scale box-1-scale box-1-scale 30 60 160
+translate box-1-translate box-1-translate 80 30 0
+add-child box-1 box-1-scale
+add-child box-1-scale box-1-translate
+
+
+import turret scenegraphmodels/turret.txt
+scale turret-scale turret-scale 1 1 1
+translate turret-translate turret-translate 0 35 0
+add-child turret turret-scale
+add-child turret-scale turret-translate
+
+copy turr-1 turret
+translate turr-1-translate turr-1-translate 80 60 60
+add-child turr-1 turr-1-translate
+
+group turr-cyl-1 turr-cyl-1
+add-child cyl-1-translate turr-cyl-1
+add-child turr-1-translate turr-cyl-1
+
+
+
+import tower scenegraphmodels/tower.txt
+scale tower-scale tower-scale 1 1 1
+translate tower-translate tower-translate 0 160 0
+add-child tower tower-scale
+add-child tower-scale tower-translate
+
+
+group boundary boundary
+add-child turr-cyl-1 boundary
+#add-child turr-cyl-2-translate boundary
+add-child box-1-translate boundary
+#add-child box-2-rotate boundary
+#add-child box-3-rotate boundary
+
+copy boundary-2 boundary
+rotate rotate-boundary rotate-boundary 90 0 1 0
+translate translate-boundary translate-boundary 10 0 10
+add-child boundary-2 rotate-boundary
+add-child rotate-boundary translate-boundary
+
+copy boundary-3 translate-boundary
+rotate rotate-boundary-3 rotate-boundary-3 90 0 1 0
+translate translate-boundary-3 translate-boundary-3 0 0 0
+add-child boundary-3 rotate-boundary-3
+add-child rotate-boundary-3 translate-boundary-3
+
+copy boundary-4 translate-boundary-3
+rotate rotate-boundary-4 rotate-boundary-4 90 0 1 0
+translate translate-boundary-4 translate-boundary-4 0 0 0
+add-child boundary-4 rotate-boundary-4
+add-child rotate-boundary-4 translate-boundary-4
+
+copy boundary-5 translate-boundary-4
+rotate rotate-boundary-5 rotate-boundary-5 90 0 1 0
+translate translate-boundary-5 translate-boundary-5 0 0 0
+add-child boundary-5 rotate-boundary-5
+add-child rotate-boundary-5 translate-boundary-5
+
+
+
+
+group boundaries boundaries
+add-child translate-boundary boundaries
+add-child translate-boundary-3 boundaries
+add-child translate-boundary-4 boundaries
+add-child translate-boundary-5 boundaries
+
+
+import door scenegraphmodels/door.txt
+scale door-scale door-scale 1 1 1
+translate door-translate door-translate 0 60 85
+add-child door door-scale
+rotate door-rotate door-rotate 90 0 1 0
+add-child door-scale door-translate
+add-child door-translate door-rotate
+
+
+
+
+group building-1 building-1
+assign-root building-1
+
+
+group image image 
+scale image-scale image-scale 0.8 0.8 0.8
+translate image-translate image-translate 0 0 0
+add-child image image-scale
+rotate image-rotate image-rotate -90 0 1 0
+add-child image-scale image-rotate
+add-child image-rotate image-translate
+
+
+
+
+#add-child rod-translate image
+#add-child block-1-translate image
+add-child block-2-translate image
+add-child block-3-translate image
+add-child turret-translate image
+add-child tower-translate image
+add-child boundaries image
+add-child door-rotate image
+
+
+
+add-child image-translate building-1
+add-light light-white-right block-3

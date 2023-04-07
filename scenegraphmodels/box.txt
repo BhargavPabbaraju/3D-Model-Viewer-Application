@@ -1,0 +1,57 @@
+#all the instances
+instance box models/box.obj
+
+#material
+material mat-node-3-0
+emission 0 0 0
+ambient 0.5 0 0
+diffuse 0.7 0 0
+specular 0.9 0 0
+shininess 10
+end-material
+
+#light1
+light light-node-1
+ambient 0.6 0.6 0.6
+diffuse 0.5 0.5 0.5
+specular 0.9 0.9 0.9
+position -1 0 0
+spot-direction 1 0 0
+spot-angle 30
+end-light
+
+#light2
+light light-node-2
+ambient 0 0.6 0.6
+diffuse 0 0.5 0.5
+specular 0 0.9 0.9
+position 0 0 2
+spot-direction 0 0 -2
+spot-angle 180
+end-light
+
+#the root
+group node-1-0 root
+scale node-2-0 scale 1 1 1
+rotate node-4-0 node-4-0 0 0 1 0
+leaf node-3-0 one-box instanceof box #comment here?
+leaf node-5-0 node-5-0 instanceof box #comment here?
+translate node-translate node-translate 1.5 0 0
+scale node-6-0 scale 1 1 1
+
+
+assign-material node-3-0 mat-node-3-0
+
+assign-material node-5-0 mat-node-3-0
+
+#add-light light-node-2 node-5-0 
+add-child node-3-0 node-2-0
+add-child node-2-0 node-4-0
+add-child node-4-0 node-1-0
+add-child node-5-0 node-translate
+add-child node-translate node-6-0
+add-child node-6-0 node-1-0
+assign-root node-1-0
+
+add-light light-node-2 node-3-0 
+

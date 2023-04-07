@@ -1,0 +1,61 @@
+#all the instances
+instance box models/box.obj
+instance sphere models/sphere.obj
+
+material saffron-mat
+ambient 1 0.4 0.12
+end-material
+
+material white-mat
+ambient 1 1 1
+end-material
+
+material green-mat
+ambient 0.01 0.41 0.21
+end-material
+
+material blue-mat
+ambient 0.02 0.01 0.55
+end-material
+
+
+group root root
+assign-root root
+
+group flag flag
+
+leaf saffron saffron instanceof box
+assign-material saffron saffron-mat
+
+leaf white white instanceof box
+assign-material white white-mat
+
+leaf green green instanceof box
+assign-material green green-mat
+
+leaf blue blue instanceof sphere
+assign-material blue blue-mat
+
+translate saffron-translate saffron-translate 0 1 0
+add-child saffron saffron-translate
+
+translate white-translate white-translate 0 0 0
+add-child white white-translate
+
+translate green-translate green-translate 0 -1 0
+add-child green green-translate
+
+add-child saffron-translate flag
+add-child green-translate flag
+add-child white-translate flag
+
+scale blue-scale blue-scale 3 3 1
+add-child blue blue-scale
+add-child blue-scale root
+
+scale flag-scale flag-scale 30 10 1
+
+add-child flag flag-scale
+add-child flag-scale root
+
+

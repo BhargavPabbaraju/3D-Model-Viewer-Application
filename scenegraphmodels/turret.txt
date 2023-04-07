@@ -1,0 +1,93 @@
+instance cylinder models/cylinder.obj
+instance box models/box.obj
+
+material cement-mat-1
+ambient 0.64 0.61 0.54
+end-material
+
+material cement-mat-2
+ambient 0.43 0.4 0.35
+end-material
+
+material cement-mat-3
+ambient 0.73 0.7 0.62
+end-material
+
+leaf turret-base turrent-base instanceof cylinder 
+assign-material turret-base cement-mat-1
+scale turret-base-scale turret-base-scale 30 30 30
+add-child turret-base turret-base-scale
+
+
+leaf turret-base-2 turrent-base-2 instanceof cylinder 
+assign-material turret-base-2 cement-mat-2
+scale turret-base-2-scale turret-base-2-scale 38 15 38
+add-child turret-base-2 turret-base-2-scale
+translate turret-base-2-translate turret-base-2-translate 0 30 0
+add-child turret-base-2-scale turret-base-2-translate
+
+leaf turret-hollow turrent-hollow instanceof cylinder 
+assign-material turret-hollow cement-mat-1
+scale turret-hollow-scale turret-hollow-scale 30 14 30
+add-child turret-hollow turret-hollow-scale
+translate turret-hollow-translate turret-hollow-translate 0 32 0
+add-child turret-hollow-scale turret-hollow-translate
+
+
+
+leaf rook-1 rook-1 instanceof box
+assign-material rook-1 cement-mat-3
+scale rook-1-scale rook-1-scale 15 25 15
+add-child rook-1 rook-1-scale
+translate rook-1-translate rook-1-translate 0 45 38
+add-child rook-1-scale rook-1-translate
+
+
+copy rook-2 rook-1-translate
+rotate rook-2-rotate rook-2-rotate 60 0 1 0
+add-child rook-2 rook-2-rotate
+
+copy rook-3 rook-2-rotate
+rotate rook-3-rotate rook-3-rotate 60 0 1 0
+add-child rook-3 rook-3-rotate
+
+copy rook-4 rook-3-rotate
+rotate rook-4-rotate rook-4-rotate 60 0 1 0
+add-child rook-4 rook-4-rotate
+
+copy rook-5 rook-4-rotate
+rotate rook-5-rotate rook-5-rotate 60 0 1 0
+add-child rook-5 rook-5-rotate
+
+copy rook-6 rook-5-rotate
+rotate rook-6-rotate rook-6-rotate 60 0 1 0
+add-child rook-6 rook-6-rotate
+
+
+group rooks rooks
+add-child rook-1-translate rooks
+add-child rook-2-rotate rooks
+add-child rook-3-rotate rooks
+add-child rook-4-rotate rooks
+add-child rook-5-rotate rooks
+add-child rook-6-rotate rooks
+
+
+group turret turret 
+
+group image image 
+scale image-scale image-scale 0.1 0.1 0.1
+translate image-translate image-translate 0 0 0
+add-child image image-scale
+add-child image-scale image-translate
+
+
+add-child turret-base-scale image 
+add-child turret-base-2-translate image 
+add-child turret-hollow-translate image 
+add-child rooks image 
+
+
+
+assign-root turret
+add-child image turret

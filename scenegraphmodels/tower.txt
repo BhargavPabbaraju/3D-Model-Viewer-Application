@@ -1,0 +1,171 @@
+#all the instances
+instance box models/box.obj
+instance cylinder models/cylinder.obj
+instance cone models/cone.obj
+instance sphere models/sphere.obj
+
+material base-mat
+ambient 0.22 0.58 0.2
+end-material
+
+material tower-mat
+ambient 0.43 0.4 0.35
+diffuse 0.43 0.4 0.35
+specular 0.43 0.4 0.35
+shininess 50
+end-material
+
+material tower-cone-mat
+ambient 0.73 0.7 0.62
+diffuse 0.73 0.7 0.62
+specular 0.73 0.7 0.62
+shininess 50
+end-material
+
+#light1
+light light-tower-cone
+ambient 0.6 0.6 0.6
+diffuse 0.5 0.5 0.5
+specular 0.9 0.9 0.9
+position -1 0.5 0
+spot-direction 1 0 0
+spot-angle 15
+end-light
+
+light light-tower
+ambient 0.1 0.1 0.1
+diffuse 0.3 0.3 0.3
+specular 0.5 0.5 0.5
+position -1 0.5 0
+spot-direction 1 0 0
+spot-angle 70
+end-light
+
+material flag-rod-mat
+ambient 0.48 0.25 0
+end-material
+
+material flag-mat
+ambient 1 0 0
+end-material
+
+material knob-mat
+ambient 0.9 0.71 0.15
+end-material
+
+
+
+import indian-flag scenegraphmodels/indian-flag.txt
+
+group root root
+
+
+
+
+
+
+
+translate translate-whole-thing translate-whole-thing 0 -70 0
+add-child translate-whole-thing root
+
+group image image
+add-child image translate-whole-thing
+
+
+scale i-scale i-scale 0.7 0.5 1
+translate i-translate i-translate 11 40 0
+add-child indian-flag i-scale 
+add-child i-scale i-translate
+
+add-child i-translate root
+
+
+scale scalebase scalebase 100 5 100 
+#add-child scalebase image
+
+leaf base base instanceof box
+assign-material base base-mat
+
+scale scaletower scaletower 30 60 30 
+add-child scaletower image
+
+leaf tower tower instanceof cylinder
+assign-material tower tower-mat
+
+add-child base scalebase
+
+add-child tower scaletower
+
+
+leaf tower-cone tower-cone instanceof cone
+assign-material tower-cone tower-cone-mat
+add-light light-tower-cone tower-cone 
+
+translate tower-cone-translate tower-cone-translate 0 60 0
+
+scale tower-cone-scale tower-cone-scale 30 30 30
+
+add-child tower-cone-scale tower-cone-translate
+
+add-child tower-cone tower-cone-scale
+
+add-child tower-cone-translate image
+
+group flag flag
+
+
+
+leaf flag-rod flag-rod instanceof box
+assign-material flag-rod flag-rod-mat
+
+leaf flag-flag flag-flag instanceof box
+assign-material flag-flag flag-mat
+
+scale flag-rod-scale flag-rod-scale 1 40 1
+add-child flag-rod flag-rod-scale
+
+scale flag-flag-scale flag-flag-scale 20 10 1
+add-child flag-flag flag-flag-scale
+
+translate flag-flag-translate flag-flag-translate 10 15 0
+add-child flag-flag-scale flag-flag-translate
+
+#add-child flag-flag-translate flag
+add-child flag-rod-scale flag
+
+translate flag-translate flag-translate 0 100 0
+add-child flag flag-translate
+
+add-child flag-translate image
+
+
+leaf door door instanceof box
+assign-material door flag-rod-mat
+
+scale door-scale door-scale 20 30 1
+add-child door door-scale 
+
+translate door-translate door-translate 0 15 30
+add-child door-scale door-translate
+
+add-child door-translate image
+
+leaf knob knob instanceof sphere
+assign-material knob knob-mat
+
+scale knob-scale knob-scale 3 3 1
+add-child knob knob-scale
+
+translate knob-translate knob-translate 5 15 30
+add-child knob-scale knob-translate
+
+add-child knob-translate image
+
+group new-root new-root
+
+rotate root-rotate root-rotate 90 0 1 0
+add-child root root-rotate
+
+add-child root-rotate new-root 
+
+assign-root new-root
